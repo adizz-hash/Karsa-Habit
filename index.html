@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-  if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
+  const appUsername = localStorage.getItem('appUsername');
+  if (!appUsername) {
+    window.location.href = 'login.html';
   }
 </script>
     <link rel="manifest" href="manifest.json">
