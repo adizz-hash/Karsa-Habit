@@ -1,0 +1,15 @@
+{
+  "name": "Catatan Belajar dan Olahraga Harian",
+  "short_name": "Karsa Habit",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1a1f3a",
+  "theme_color": "#2a3a5f",
+  "icons": [
+    {
+      "src": "logo karsa habit.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
