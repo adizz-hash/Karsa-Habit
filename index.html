@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily study and exercise schedule</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="user-header">
+            <span id="userStatusInfo"> Status: Tamu (Lokal)</span>
+            <div class="header-actions">
+                <button id="btnAktifkanNotif" class="btn-subtle">🔔 Aktifkan Pengingat</button>
+                <button id="btnLogout" class="btn-subtle" style="display: none;"> Logout</button>
+            </div>
+        </div>
+
+        <h1>✨ Catatan Belajar dan Olahraga Harian ✨</h1>
+        <p class="tagline">Catat dan pantau progres olahraga & belajar harianmu dengan mudah</p>
+
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-info">
+                    <div class="stat-label">Total Bulan</div>
+                    <div class="stat-value" id="totalBulan">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-info">
+                    <div class="stat-label">Hari Tercatat</div>
+                    <div class="stat-value" id="totalHari">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-bar">
+            <button id="btnBukaModalBulan" class="btn-tambah"> Tambah Tabel Bulan Baru</button>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📊</div>
+            <h2>Belum ada data tracker</h2>
+            <p>Mulai dengan membuat tabel bulan pertamamu dan catat aktivitas harianmu</p>
+            <button class="btn-empty-action" id="btnEmptyCreate">Buat Tabel Bulan Sekarang</button>
+        </div>
+
+        <div id="daftarTabelBulan"></div>
+    </div>
+
+    <div id="modalTambahBulan" class="modal">
+        <div class="modal-content">
+            <span class="close-btn-bulan close-btn">&times;</span>
+            <h3 id="modalBulanTitle">Tambah Tabel Bulan</h3>
+            <input type="hidden" id="editBulanId" value="">
+            <div class="form-group">
+                <label for="inputNamaBulan">Nama Bulan atau Periode:</label>
+                <input type="text" id="inputNamaBulan" placeholder="Contoh: September / Bulan 1" />
+            </div>
+            <button id="btnSubmitBulan" class="btn-success"> Simpan Tabel</button>
+        </div>
+    </div>
+
+    <div id="modalContainer" class="modal">
+        <div class="modal-content">
+            <span class="close-btn-jadwal close-btn">&times;</span>
+            <h3 id="modalHeader">Detail Aktivitas</h3>
+
+            <div id="viewSection">
+                <div class="info-box">
+                    <p><strong>Tanggal:</strong> <span id="viewTanggalText" class="tanggal-badge-inline"></span></p>
+                    <p><strong>Status:</strong> <span id="viewStatus" class="status-badge-inline"></span></p>
+                    <p><strong>Aktivitas Hari Ini:</strong></p>
+                    <p id="viewDetailText" class="detail-box"></p>
+                </div>
+                <div class="button-group">
+                    <button id="btnKeEdit" class="btn-primary"> Edit Data</button>
+                    <button id="btnHapusData" class="btn-delete"> Hapus Data</button>
+                </div>
+            </div>
+
+            <div id="editSection" style="display: none;">
+                <div class="form-group">
+                    <label for="inputTanggal">Pilih Tanggal:</label>
+                    <input type="date" id="inputTanggal">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputStatus"> Status / Progress:</label>
+                    <select id="inputStatus">
+                        <option value="">-- Pilih Status --</option>
+                        <option value="✔ Selesai">✔ Selesai</option>
+                        <option value="50%">50% Sebagian</option>
+                        <option value="Rest"> Rest/Istirahat</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDetail"> Deskripsi Kegiatan:</label>
+                    <textarea id="inputDetail" rows="4"
+                        placeholder="Contoh: Belajar JavaScript DOM / Jogging 5km di taman"></textarea>
+                </div>
+
+                <button id="btnSimpan" class="btn-success">Simpan Data</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p> Keep tracking, keep improving! | Jadwal Tracker v1.0</p>
+    </footer>
+
+    <div id="toastNotification" class="toast-notification"></div>
+
+    <div id="modalKonfirmasiHapus" class="modal">
+        <div class="modal-content modal-confirm">
+            <span class="close-btn-confirm close-btn">&times;</span>
+            <h3>⚠️ Konfirmasi Penghapusan</h3>
+
+            <div class="confirm-message">
+                <p>Yakin ingin menghapus <strong id="confirmBulanName">Bulan</strong>?</p>
+            </div>
+
+            <div class="confirm-buttons">
+                <button id="btnBatalHapus" class="btn-cancel">Cancel</button>
+                <button id="btnKonfirmasiHapus" class="btn-danger">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
