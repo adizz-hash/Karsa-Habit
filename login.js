@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    // Check if user sudah login
-    checkLoginStatus();
+    // 1. Matikan checkLoginStatus() agar tidak memicu looping ke index.html
+    // checkLoginStatus();
 
     // Event handlers untuk login
     $('#btnMasuk').on('click', function() {
@@ -42,13 +42,15 @@ $(document).ready(function() {
         goToApp('Guest');
     });
 
-    // Function: Check Login Status
+    // Function: Check Login Status (Di-comment untuk mencegah conflik/looping)
+    /*
     function checkLoginStatus() {
         const userData = localStorage.getItem('currentUser');
         if (userData) {
             goToApp(JSON.parse(userData).username);
         }
     }
+    */
 
     // Function: Handle Login
     function handleLogin() {
